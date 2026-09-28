@@ -90,7 +90,7 @@ button { font: inherit; color: inherit; }
   transition: opacity .15s, transform .15s, visibility .15s;
 }
 .work-panel.open { opacity: 1; visibility: visible; transform: none; }
-.work-panel a { display: grid; grid-template-columns: 40px 1fr auto; align-items: baseline; gap: 12px; padding: 12px 14px; }
+.work-panel a { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 12px; padding: 12px 14px; }
 .work-panel a + a { border-top: 1px solid #3a3a37; }
 .work-panel .n { color: #8d8a83; }
 .work-panel .t { font-family: var(--display); font-stretch: 62%; font-weight: 800; font-size: 26px; line-height: 1; text-transform: uppercase; letter-spacing: 0; }
@@ -107,7 +107,7 @@ button { font: inherit; color: inherit; }
 }
 .giant span { display: block; }
 .giant span:last-child { text-align: right; }
-.mast-row { border-top: var(--rule); margin-top: clamp(16px, 2vw, 28px); padding-block: 14px 18px; align-items: start; }
+.mast-row { border-top: var(--rule); border-bottom: var(--rule); margin-top: clamp(16px, 2vw, 28px); padding-block: 14px 18px; align-items: start; }
 .mast-row .c1 { grid-column: 1 / span 3; }
 .mast-row .c2 { grid-column: 4 / span 6; margin: 0; font-family: var(--body); text-transform: none; letter-spacing: -.005em; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.25; font-weight: 500; letter-spacing: -.005em; }
 .mast-row .c3 { grid-column: 10 / -1; justify-self: end; display: inline-flex; align-items: center; gap: 8px; }
@@ -130,7 +130,7 @@ button { font: inherit; color: inherit; }
 .card .media img { height: 100%; object-fit: cover; }
 .card .media.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 10%; padding: 8% 18%; }
 .card .media.duo img { object-fit: contain; }
-.card .info { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: end; padding-top: 12px; }
+.card .info { display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: end; padding-top: 12px; }
 .card .num { font-family: var(--display); font-stretch: 62%; font-weight: 800; font-size: clamp(34px, 3.4vw, 56px); line-height: .8; }
 .card h3 { margin: 0; font-family: var(--display); font-stretch: 62%; font-weight: 800; text-transform: uppercase; font-size: clamp(26px, 2.6vw, 44px); line-height: .9; }
 .card .kind { text-align: right; padding-bottom: 2px; }
@@ -275,8 +275,8 @@ figure.cell figcaption { margin-top: 6px; }
 
   .cards { grid-template-columns: 1fr; }
   .card.featured .media { aspect-ratio: 4 / 3; }
-  .card .info { grid-template-columns: auto 1fr; }
-  .card .kind { grid-column: 1 / -1; text-align: left; }
+  .card .info { grid-template-columns: 1fr; }
+  .card .kind { text-align: left; }
 
   .about .label, .about .text { grid-column: 1 / -1; }
   .about .label { margin-bottom: 14px; }

@@ -22,7 +22,7 @@
     <nav aria-label="Hovedmenu">
       <div class="work-menu">
         <button class="work-toggle" type="button" aria-expanded="false" aria-controls="work-panel">Arbejde <span class="chev" aria-hidden="true">▾</span></button>
-        <div class="work-panel mono" id="work-panel"><a href="sidste-skoledag.html"><span class="n">01</span><span class="t">Sidste Skoledag</span><span class="k">Visuel identitet</span></a><a href="osterland.html"><span class="n">02</span><span class="t">Østerland</span><span class="k">Brandstrategi & identitet</span></a><a href="tag-plads.html"><span class="n">03</span><span class="t">Tag Plads</span><span class="k">Co-creation-event</span></a><a href="bryghuset.html"><span class="n">04</span><span class="t">Christian IV’s Bryghus</span><span class="k">Oplevelseskoncept & etiketter</span></a><a href="frem-og-tilbage.html" aria-current="page"><span class="n">05</span><span class="t">Frem og tilbage</span><span class="k">Typografisk plakatserie</span></a></div>
+        <div class="work-panel mono" id="work-panel"><a href="sidste-skoledag.html"><span class="t">Sidste Skoledag</span><span class="k">Visuel identitet</span></a><a href="osterland.html"><span class="t">Østerland</span><span class="k">Brandstrategi & identitet</span></a><a href="tag-plads.html"><span class="t">Tag Plads</span><span class="k">Co-creation-event</span></a><a href="bryghuset.html"><span class="t">Christian IV’s Bryghus</span><span class="k">Oplevelseskoncept & etiketter</span></a><a href="frem-og-tilbage.html" aria-current="page"><span class="t">Frem og tilbage</span><span class="k">Typografisk plakatserie</span></a></div>
       </div>
       <a href="index.html#om">Om</a>
       <a href="index.html#kontakt">Kontakt</a>
@@ -89,6 +89,20 @@
     var sx=null; lb.addEventListener('touchstart', function(e){ sx=e.touches[0].clientX; }, {passive:true});
     lb.addEventListener('touchend', function(e){ if(sx===null) return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50) show(idx+(dx<0?1:-1)); sx=null; });
   }
+
+
+  // flip-through of sketches
+  document.querySelectorAll('.flip').forEach(function(box){
+    var imgs=[].slice.call(box.querySelectorAll('img')), i=0, timer=null, visible=false, paused=false;
+    var wrap=box.closest('.flip-wrap'), n=wrap.querySelector('.flip-n'), btn=wrap.querySelector('.flip-toggle');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches; if(reduce) paused=true;
+    imgs.forEach(function(im){ im.loading='eager'; });
+    function show(k){ imgs[i].classList.remove('on'); i=(k+imgs.length)%imgs.length; imgs[i].classList.add('on'); n.textContent=(i<9?'0':'')+(i+1); }
+    function run(){ clearInterval(timer); timer=null; if(visible && !paused) timer=setInterval(function(){ show(i+1); }, +box.dataset.interval||420); btn.textContent=paused?'Afspil ▶':'Pause ▮▮'; btn.setAttribute('aria-pressed', paused); }
+    btn.addEventListener('click', function(){ paused=!paused; run(); });
+    box.addEventListener('click', function(){ if(paused) show(i+1); else { paused=true; run(); } });
+    if('IntersectionObserver' in window){ new IntersectionObserver(function(e){ visible=e[0].isIntersecting; run(); }).observe(box); } else { visible=true; run(); }
+  });
 
   var clock=document.getElementById('clock');
   if(clock){ var f=function(){ try{ clock.textContent='København '+new Date().toLocaleTimeString('da-DK',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Copenhagen'}); }catch(e){} }; f(); setInterval(f,30000); }
