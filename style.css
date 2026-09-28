@@ -307,3 +307,10 @@ figure.cell figcaption { margin-top: 6px; }
   .flip-side { flex-direction: row; flex-wrap: wrap; align-items: flex-end; }
   .flip-count { font-size: 72px; }
 }
+
+/* portrait */
+.about .label { display: flex; flex-direction: column; gap: 14px; }
+.portrait { margin: 0; border: var(--rule); background: var(--ink); max-width: 320px; }
+.portrait img { aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter .3s; }
+.portrait:hover img { filter: none; }
+@media (max-width: 800px) { .portrait { max-width: 240px; } }
